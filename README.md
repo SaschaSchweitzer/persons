@@ -48,8 +48,8 @@ nm = persons.Persons()
 import pandas as pd
 name_table = pd.DataFrame({
 				"fnm" 		: ["Tim", "Tim W.", "Tim J.V.", "Tim Walter"]
-				,"snm" 		: 	["Burton", "Burton", "Burton", "Burton"]
-				,"year" 	: 	[1982, 1996, 2007, 2012]
+				,"snm" 		: ["Burton", "Burton", "Burton", "Burton"]
+				,"year" 	: [1982, 1996, 2007, 2012]
 			})
 
 result = nm.persons_from_names( name_table )
@@ -59,17 +59,17 @@ print(result)
 
 This returns the following result:
 ```
->   person_id         source  name_id         fnm     snm  matching  \
->0          0  default table        0         Tim  Burton     equal   
->1          1  default table        1      Tim W.  Burton  vertical   
->2          1  default table        3  Tim Walter  Burton  vertical   
->3          2  default table        2    Tim J.V.  Burton     equal   
+>    person_id         source  name_id         fnm     snm  matching  \
+> 0          0  default table        0         Tim  Burton     equal   
+> 1          1  default table        1      Tim W.  Burton  vertical   
+> 2          1  default table        3  Tim Walter  Burton  vertical   
+> 3          2  default table        2    Tim J.V.  Burton     equal   
 
->                     saving_time  year  
->0  2017-09-17 16:43:12 CEST+0200  1982  
->1  2017-09-17 16:43:12 CEST+0200  1996  
->2  2017-09-17 16:43:12 CEST+0200  2012  
->3  2017-09-17 16:43:12 CEST+0200  2007  
+>                      saving_time  year  
+> 0  2017-09-17 16:43:12 CEST+0200  1982  
+> 1  2017-09-17 16:43:12 CEST+0200  1996  
+> 2  2017-09-17 16:43:12 CEST+0200  2012  
+> 3  2017-09-17 16:43:12 CEST+0200  2007  
 ```
 
 As the example demonstrates, after processing a table of names (and potentially additional information), 'persons' returns the table enhanced by a column titled 'person_id'. For each person that has been identified, 'person_id' indicates a unique number that is shared by all instances of the person. In the example given, three persons have been identified from the four names. "Tim W." and "Tim Walter" have been identified as variants of the same name and assigned the ID '1'. "Tim J.V." is not compatible with "Tim Walter" and has been assigned a different ID ('2'). "Tim" would be compatible with both of the two persons identified previously. However, since those persons are incompatible, "Tim" is assigned a separate ID ('0').
