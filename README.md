@@ -12,10 +12,11 @@ There is a wide range of people-related data. Examples include authors of public
 ### Challenges of Author Disambiguation
 
 While in many cases, names directly map to identities, there are at least two major challenges: 
-Challenge 1 (multiple variants of forename):
-A single author can publish under several different names. This issue is often related to authors with multiple forenames. The 'persons' package deals with it by algorithmically recognizing and mapping related names.
-Challenge 2 (sharing of same name):
-Multiple authors can share the same name. This issue is very difficult to detect without manual research and intervention in suspicious cases. Therefore, the 'persons' package provides the option to load a table of persons who were manually identified to be distinct persons ("known_persons"). 
+
+* Challenge 1 (multiple variants of forename):
+	* A single author can publish under several different names. This issue is often related to authors with multiple forenames. The 'persons' package deals with it by algorithmically recognizing and mapping related names.
+* Challenge 2 (sharing of same name):
+	* Multiple authors can share the same name. This issue is very difficult to detect without manual research and intervention in suspicious cases. Therefore, the 'persons' package provides the option to load a table of persons who were manually identified to be distinct persons ("known_persons"). 
 
 ### Approach of 'persons'
 
