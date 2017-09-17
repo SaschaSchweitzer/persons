@@ -1,4 +1,4 @@
-# persons 0.1a
+# persons 0.2a
 A tool for graph-based author disambiguation. Identify distinct persons by matching forenames and surnames. Supports known persons, year data, and others. See 'examples.py' for a quick-start tutorial.
 
 ## Installation
