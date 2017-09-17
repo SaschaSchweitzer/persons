@@ -1,5 +1,5 @@
 # persons 0.1a
-A tool for graph-based author disambiguation. Identify distinct persons by matching forenames and surnames. Supports known persons, year data, and others. See 'examples.py' script for a quick start tutorial.
+A tool for graph-based author disambiguation. Identify distinct persons by matching forenames and surnames. Supports known persons, year data, and others. See 'examples.py' for a quick-start tutorial.
 
 ## Installation
 
@@ -14,9 +14,9 @@ There is a wide range of people-related data. Examples include authors of public
 While in many cases, names directly map to identities, there are at least two major challenges: 
 
 * Challenge 1 (multiple variants of forename):
-	* A single author can publish under several different names. This issue is often related to authors with multiple forenames. The 'persons' package deals with it by algorithmically recognizing and mapping related names.
+	* A single person can appear under several different names. This issue is often related to persons with multiple forenames. The 'persons' package deals with it by algorithmically recognizing and mapping related names.
 * Challenge 2 (sharing of same name):
-	* Multiple authors can share the same name. This issue is very difficult to detect without manual research and intervention in suspicious cases. Therefore, the 'persons' package provides the option to load a table of persons who were manually identified to be distinct persons ("known_persons"). 
+	* Multiple persons can share the same name. This issue is very difficult to detect without manual research and intervention in suspicious cases. Therefore, the 'persons' package provides the option to load a table of persons who were manually identified to be distinct persons ("known_persons"). 
 
 ### Approach of 'persons'
 
@@ -26,15 +26,15 @@ The default disambiguation procedure of 'persons' employs a graph-based, hierarc
 Identify sets of name entries with identical surnames. 
 
 * Step 2: 
-Within the set of a given surname, construct a graph of the relationships of the corresponding forenames to each other. Categorize forenames as either identical, different, subsets of each other or partially compatible ("interlaced"). For example, the forename ‘‘Michael’’ is identical to ‘‘Michael’’ and it is different from ‘‘Tom’’. In the terminology of 'persons', ‘‘Michael J.’’ is a subset of ‘‘Michael’’. This is, because ‘‘Michael J.’’ provides more specific information than ‘‘Michael’’, making it incompatible with certain names that ‘‘Michael’’ would still be compatible with. If none of those three categories applies, a record is defined as "interlaced". For example, 'persons' categorizes ‘‘M. John’’ to be interlaced with ‘‘Michael J.’’
+Within the set of a given surname, construct a graph of the relationships of the corresponding forenames to each other. Categorize forenames as either identical, different, subsets of each other, or partially compatible ("interlaced"). For example, the forename ‘‘Michael’’ is identical to ‘‘Michael’’ and it is different from ‘‘Tom’’. In the terminology of 'persons', ‘‘Michael J.’’ is a subset of ‘‘Michael’’. This is, because ‘‘Michael J.’’ provides more specific information than ‘‘Michael’’, making it incompatible with certain names that ‘‘Michael’’ would still be compatible with. If none of those three categories applies, a record is defined as "interlaced". For example, 'persons' categorizes ‘‘M. John’’ to be interlaced with ‘‘Michael J.’’
 
 * Step 3:
 After determining all binary relationships between the names given, model the sets of forenames as nodes and their relationships as edges in a graph.
 
 * Step 4:
-Finally, eliminate "shortcuts" between nodes to determine the minimum graph and traversed the non-forking paths of subset relationships from the graph’s leafs upwards. Thus, in the example, 'persons' matches two entries with identical last names and the forenames ‘‘Michael John’’ and ‘‘Michael’’, respectively, to the same person if they are the only two forenames. It would not match them, however, if there were a ‘‘Michael Jason’’ in addition to ‘‘Michael John’’ and ‘‘Michael’’, since there would be a fork in the tree below ‘‘Michael’’.
+Finally, eliminate "shortcuts" between nodes to determine the minimum graph and traverse the non-forking paths of subset relationships from the graph’s leafs upwards. In the example, 'persons' matches two entries with identical last names and the forenames ‘‘Michael John’’ and ‘‘Michael’’, respectively, to the same person if they are the only two forenames. It would not match them, however, if there were a ‘‘Michael Jason’’ in addition to ‘‘Michael John’’ and ‘‘Michael’’, since there would be a fork in the tree below ‘‘Michael’’.
 
-The implementation of graph-based author disambiguation in this package has been used and described in previous scientific studies (e.g., Önder and Schweitzer, 2017).
+The implementation of graph-based author disambiguation in this package has been originally been created for the use in the scientific study by Önder and Schweitzer (2017).
 
 ## Using 'persons'
 
@@ -68,7 +68,7 @@ This returns the following result:
 > 1  2017-09-17 12:16:57 CEST+0200  1982  
 ```
 
-As the example demonstrates, after processing a table of names (and potentially additional information), 'persons' returns the table enhanced by a column titled 'person_id'. For each person that has been identified, 'person_id' indicates a unique number that is shared by all instances of the person. In the example given, both records have been assigned to the same distinct person with the id '0'.
+As the example demonstrates, after processing a table of names (and potentially additional information), 'persons' returns the table enhanced by a column titled 'person_id'. For each person that has been identified, 'person_id' indicates a unique number that is shared by all instances of the person. In the example given, both records have been assigned to the same distinct person with the ID '0'.
 
 Please note that this package has been tested only for few specific use cases. The code has been optimized neither for speed, nor beauty. Bugs are to be expected. Feedback on those is welcome (sascha.schweitzer@gmail.com). 
 
@@ -91,7 +91,7 @@ This package supports a number of alternative options for identifying persons. T
 
 ### Details if 'match_subsets' or 'match_interlaced' Set to True
 
-* absolute_position_matters (True) 			: The initials, as long as they exist, of the matching names should have the same positions. Usually, the name in the first position is spelled out completely.
+* absolute_position_matters (True) 			: The initials, as far as they exist, of the matching names should have the same positions. Usually, the name in the first position is spelled out completely.
 	* Example:
 
 		* David 				& J. David 			are not allowed, because the first initials are different.
