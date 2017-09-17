@@ -34,7 +34,7 @@ After determining all binary relationships between the names given, model the se
 * Step 4:
 Finally, eliminate "shortcuts" between nodes to determine the minimum graph and traverse the non-forking paths of subset relationships from the graph’s leafs upwards. In the example, 'persons' matches two entries with identical last names and the forenames ‘‘Michael John’’ and ‘‘Michael’’, respectively, to the same person if they are the only two forenames. It would not match them, however, if there were a ‘‘Michael Jason’’ in addition to ‘‘Michael John’’ and ‘‘Michael’’, since there would be a fork in the tree below ‘‘Michael’’.
 
-The implementation of graph-based author disambiguation in this package has been originally been created for the use in the scientific study by Önder and Schweitzer (2017).
+The implementation of graph-based author disambiguation in this package has originally been created for and described in the scientific study by Önder and Schweitzer (2017).
 
 ## Using 'persons'
 
