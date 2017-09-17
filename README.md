@@ -45,11 +45,11 @@ import persons
 nm = persons.Persons()
 
 import pandas as pd
-name_table 	=	pd.DataFrame({
-								"fnm" 			: 	["Tim", "Tim W."]
-								,"snm" 			: 	["Burton", "Burton"]
-								,"year" 		: 	[1982, 1996]
-				})
+name_table 	= pd.DataFrame({
+				"fnm" 			: 	["Tim", "Tim W."]
+				,"snm" 			: 	["Burton", "Burton"]
+				,"year" 		: 	[1982, 1996]
+			})
 
 result = nm.persons_from_names( name_table )
 
