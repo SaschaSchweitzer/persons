@@ -46,10 +46,10 @@ import persons
 nm = persons.Persons()
 
 import pandas as pd
-name_table 	= pd.DataFrame({
-				"fnm" 			: 	["Tim", "Tim W."]
-				,"snm" 			: 	["Burton", "Burton"]
-				,"year" 		: 	[1982, 1996]
+name_table = pd.DataFrame({
+				"fnm" 		: ["Tim", "Tim W.", "Tim J.V.", "Tim Walter"]
+				,"snm" 		: 	["Burton", "Burton", "Burton", "Burton"]
+				,"year" 	: 	[1982, 1996, 2007, 2012]
 			})
 
 result = nm.persons_from_names( name_table )
@@ -59,16 +59,20 @@ print(result)
 
 This returns the following result:
 ```
->    person_id         source  name_id     fnm     snm               matching  \
-> 0          0  default table        1  Tim W.  Burton  ['equal', 'vertical']   
-> 1          0  default table        0     Tim  Burton  ['equal', 'vertical']   
+>   person_id         source  name_id         fnm     snm  matching  \
+>0          0  default table        0         Tim  Burton     equal   
+>1          1  default table        1      Tim W.  Burton  vertical   
+>2          1  default table        3  Tim Walter  Burton  vertical   
+>3          2  default table        2    Tim J.V.  Burton     equal   
 
 >                     saving_time  year  
-> 0  2017-09-17 12:16:57 CEST+0200  1996  
-> 1  2017-09-17 12:16:57 CEST+0200  1982  
+>0  2017-09-17 16:43:12 CEST+0200  1982  
+>1  2017-09-17 16:43:12 CEST+0200  1996  
+>2  2017-09-17 16:43:12 CEST+0200  2012  
+>3  2017-09-17 16:43:12 CEST+0200  2007  
 ```
 
-As the example demonstrates, after processing a table of names (and potentially additional information), 'persons' returns the table enhanced by a column titled 'person_id'. For each person that has been identified, 'person_id' indicates a unique number that is shared by all instances of the person. In the example given, both records have been assigned to the same distinct person with the ID '0'.
+As the example demonstrates, after processing a table of names (and potentially additional information), 'persons' returns the table enhanced by a column titled 'person_id'. For each person that has been identified, 'person_id' indicates a unique number that is shared by all instances of the person. In the example given, three persons have been identified from the four names. "Tim W." and "Tim Walter" have been identified as variants of the same name and assigned the ID '1'. "Tim J.V." is not compatible with "Tim Walter" and has been assigned a different ID ('2'). "Tim" would be compatible with both of the two persons identified previously. However, since those persons are incompatible, "Tim" is assigned a separate ID ('0').
 
 Please note that this package has been tested only for few specific use cases. The code has been optimized neither for speed, nor beauty. Bugs are to be expected. Feedback on those is welcome (sascha.schweitzer@gmail.com). 
 
@@ -78,20 +82,28 @@ This package supports a number of alternative options for identifying persons. T
 
 ### Transformations of the Input
 
-* remove_particles_suffixes (True) 			: Remove particles "van", "von", "de", "d", "di", "dei", "of", "zu", "zur", "dos", "af", "der", and "graf."
-* normalize_names (True) 						: Replace special characters (e.g., "é" by "e").
+* remove_particles_suffixes (True) 			
+	* Remove particles "van", "von", "de", "d", "di", "dei", "of", "zu", "zur", "dos", "af", "der", and "graf."
+* normalize_names (True) 						
+	* Replace special characters (e.g., "é" by "e").
 
 ### Relation of Forenname Elements
 
-* only_first_fnm (False) 						: Process only the first forename if multiple forenames are given.
-* middle_name_rule (False) 					: Only match names if middle initial identical (cf. Jones, 2009).
-* match_subsets (True) 						: Names with less information that are consistent are matched.
-* match_interlaced (False)					: Names that are not identical, but have same amount/quantity of information are matched.
-* ignore_order_of_forenames (False)			: Ignore order of forenames / middle names.
+* only_first_fnm (False) 						
+	* Process only the first forename if multiple forenames are given.
+* middle_name_rule (False) 					
+	* Only match names if middle initial identical (cf. Jones, 2009).
+* match_subsets (True) 						
+	* Names with less information that are consistent are matched.
+* match_interlaced (False)					
+	* Names that are not identical, but have same amount/quantity of information are matched.
+* ignore_order_of_forenames (False)			
+	* Ignore order of forenames / middle names.
 
 ### Details if 'match_subsets' or 'match_interlaced' Set to True
 
-* absolute_position_matters (True) 			: The initials, as far as they exist, of the matching names should have the same positions. Usually, the name in the first position is spelled out completely.
+* absolute_position_matters (True) 			
+	* The initials, as far as they exist, of the matching names should have the same positions. Usually, the name in the first position is spelled out completely.
 	* Example:
 
 		* David 				& J. David 			are not allowed, because the first initials are different.
