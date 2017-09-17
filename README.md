@@ -91,9 +91,11 @@ This package supports a number of alternative options for identifying persons. T
 ### Details if 'match_subsets' or 'match_interlaced' Set to True
 
 * absolute_position_matters (True) 			: The initials, as long as they exist, of the matching names should have the same positions. Usually, the name in the first position is spelled out completely.
-	Example:
-		David 				& J. David 			are not allowed, because the first initials are different.
-		Alber Louis J.    	& Alber James 		are not allowed, because the second initials are different.
+	* Example:
+
+		* David 				& J. David 			are not allowed, because the first initials are different.
+
+		* Alber Louis J.    	& Alber James 		are not allowed, because the second initials are different.
 
 ## References
 
